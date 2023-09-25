@@ -1,0 +1,23 @@
+{
+  "name": "connect-go-sample",
+  "dockerComposeFile": [
+    "../docker/compose.yml",
+    "./compose.yml"
+  ],
+  "service": "connect-go-sample",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "golang.go",
+        "ms-azuretools.vscode-docker",
+        "zxh404.vscode-proto3"
+      ]
+    }
+  },
+  "initializeCommand": "",
+  "postCreateCommand": "git config --system --add safe.directory /workspace"
+}
