@@ -8,11 +8,15 @@ buf-gen:
 
 .PHONY: run-server
 run-server:
-	go run ./cmd/server/main.go
+	go run ./cmd/server/...
 
 .PHONY: run-client
 run-client:
-	go run ./cmd/client/main.go
+	go run ./cmd/client/...
+
+.PHONY: test-server
+test-server:
+	GOEXPERIMENT=loopvar go test -race ./cmd/server/...
 
 .PHONY: greet-curl
 greet-curl:
