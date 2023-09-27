@@ -46,6 +46,7 @@ func TestMain(t *testing.T) {
 	}
 
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.scenario, func(t *testing.T) {
 			t.Parallel()
 

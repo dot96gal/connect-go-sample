@@ -14,6 +14,14 @@ run-server:
 run-client:
 	go run ./cmd/client/...
 
+.PHONY: lint-client
+lint-client:
+	golangci-lint run ./cmd/client/...
+
+.PHONY: lint-server
+lint-server:
+	golangci-lint run ./cmd/server/...
+
 .PHONY: test-server
 test-server:
 	GOEXPERIMENT=loopvar go test -race ./cmd/server/...

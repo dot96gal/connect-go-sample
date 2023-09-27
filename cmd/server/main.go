@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/dot96gal/connect-go-sample/gen/greet/v1/greetv1connect"
@@ -14,9 +15,13 @@ func main() {
 	path, handler := greetv1connect.NewGreetServiceHandler(greeter)
 	mux.Handle(path, handler)
 
-	http.ListenAndServe(
+	err := http.ListenAndServe(
 		"localhost:8080",
 		// use h2c so we can serve HTTP/2 without tls
 		h2c.NewHandler(mux, &http2.Server{}),
 	)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }
