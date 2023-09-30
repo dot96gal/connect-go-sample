@@ -7,7 +7,7 @@ updates:
       time: "07:00"
       timezone: "Asia/Tokyo"
   - package-ecosystem: "docker"
-    directory: "/"
+    directory: "/docker"
     schedule:
       interval: "daily"
       time: "07:00"
