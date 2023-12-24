@@ -18,7 +18,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// GreetServiceName is the fully-qualified name of the GreetService service.
@@ -35,6 +35,12 @@ const (
 const (
 	// GreetServiceGreetProcedure is the fully-qualified name of the GreetService's Greet RPC.
 	GreetServiceGreetProcedure = "/greet.v1.GreetService/Greet"
+)
+
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	greetServiceServiceDescriptor     = v1.File_greet_v1_greet_proto.Services().ByName("GreetService")
+	greetServiceGreetMethodDescriptor = greetServiceServiceDescriptor.Methods().ByName("Greet")
 )
 
 // GreetServiceClient is a client for the greet.v1.GreetService service.
@@ -55,7 +61,8 @@ func NewGreetServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 		greet: connect.NewClient[v1.GreetRequest, v1.GreetResponse](
 			httpClient,
 			baseURL+GreetServiceGreetProcedure,
-			opts...,
+			connect.WithSchema(greetServiceGreetMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
@@ -84,7 +91,8 @@ func NewGreetServiceHandler(svc GreetServiceHandler, opts ...connect.HandlerOpti
 	greetServiceGreetHandler := connect.NewUnaryHandler(
 		GreetServiceGreetProcedure,
 		svc.Greet,
-		opts...,
+		connect.WithSchema(greetServiceGreetMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/greet.v1.GreetService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
