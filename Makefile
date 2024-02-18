@@ -24,7 +24,7 @@ lint-server:
 
 .PHONY: test-server
 test-server:
-	GOEXPERIMENT=loopvar go test -race ./cmd/server/...
+	go test -race ./cmd/server/...
 
 .PHONY: greet-curl
 greet-curl:
