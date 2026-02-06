@@ -1,4 +1,4 @@
-FROM golang:1.25.6-bookworm
+FROM golang:1.26rc3-bookworm
 
 WORKDIR /workspace
 
