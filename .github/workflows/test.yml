@@ -16,7 +16,7 @@ jobs:
       - name: Lint server
         uses: golangci/golangci-lint-action@v9
         with:
-          version: v2.1
+          version: v2.10.0
           working-directory: ./cmd/server
 
       - name: Test server
