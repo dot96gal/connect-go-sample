@@ -4,8 +4,8 @@ go 1.25.0
 
 require (
 	connectrpc.com/connect v1.19.1
-	golang.org/x/net v0.52.0
+	golang.org/x/net v0.53.0
 	google.golang.org/protobuf v1.36.11
 )
 
-require golang.org/x/text v0.35.0 // indirect
+require golang.org/x/text v0.36.0 // indirect
