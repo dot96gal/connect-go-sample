@@ -5,8 +5,6 @@ import (
 	"net/http"
 
 	"github.com/dot96gal/connect-go-sample/gen/greet/v1/greetv1connect"
-	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/h2c"
 )
 
 func main() {
@@ -15,12 +13,18 @@ func main() {
 	path, handler := greetv1connect.NewGreetServiceHandler(greeter)
 	mux.Handle(path, handler)
 
-	err := http.ListenAndServe(
-		"localhost:8080",
-		// use h2c so we can serve HTTP/2 without tls
-		h2c.NewHandler(mux, &http2.Server{}),
-	)
+	// use h2c so we can serve HTTP/2 without tls
+	protocols := new(http.Protocols)
+	protocols.SetHTTP1(true)
+	protocols.SetUnencryptedHTTP2(true)
 
+	srv := &http.Server{
+		Addr:      "localhost:8080",
+		Handler:   mux,
+		Protocols: protocols,
+	}
+
+	err := srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}
